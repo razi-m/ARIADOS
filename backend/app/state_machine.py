@@ -3,7 +3,7 @@ VALID_TRANSITIONS = {
     "video_uploaded": ["analyzing"],
     "analyzing": ["analysis_completed", "failed"],
     "analysis_completed": ["approved", "failed"],
-    "approved": [],
+    "approved": ["approved"],
     "failed": [],
 }
 

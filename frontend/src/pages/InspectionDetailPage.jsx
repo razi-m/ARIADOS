@@ -113,8 +113,18 @@ function InspectionDetailPage() {
             Mission: {inspection.title}
           </div>
           <StatusBadge status={inspection.status} />
+
           {inspection.status === 'approved' && (
-            <button className="btn btn-primary" onClick={handleDownloadReport}>Download PDF Report</button>
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <button
+                className="btn"
+                onClick={handleApprove}
+                style={{ background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }}
+              >
+                Regenerate Report ↻
+              </button>
+              <button className="btn btn-primary" onClick={handleDownloadReport}>Download PDF Report</button>
+            </div>
           )}
         </div>
       </div>
