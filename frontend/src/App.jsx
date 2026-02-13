@@ -1,64 +1,57 @@
-import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuth } from './context/AuthContext'
-import Sidebar from './components/Sidebar'
-import HomePage from './pages/HomePage'
-import LoginPage from './pages/LoginPage'
-import DashboardPage from './pages/DashboardPage'
-import CreateInspectionPage from './pages/CreateInspectionPage'
-import InspectionDetailPage from './pages/InspectionDetailPage'
-import AdminPage from './pages/AdminPage'
-import DefectsPage from './pages/DefectsPage'
-import LoadingOverlay from './components/LoadingOverlay'
+import React, { lazy, Suspense } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
 
-function PrivateRoute({ children }) {
-  const { user, loading } = useAuth()
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const MissionPage = lazy(() => import('./pages/MissionPage'));
 
-  if (loading) return <LoadingOverlay message="Authenticating..." />
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
+};
 
-  // For demo purposes, we might allow access to Home/Login without auth, 
-  // but protect dashboard/admin. 
-  // However, the redesign has "Authority Login" on Home.
-  // We'll protect specific routes.
-  if (!user) return <Navigate to="/login" />
-
-  return children
-}
+const Loader = () => (
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-50">
+    <div className="text-center">
+      <div className="inline-block w-8 h-8 border-3 border-primary/20 border-t-primary rounded-full animate-spin mb-3" />
+      <p className="text-sm text-gray-400">Loading...</p>
+    </div>
+  </div>
+);
 
 function App() {
-  const { loading } = useAuth()
-
-  if (loading) return <LoadingOverlay message="Loading application..." />
-
   return (
-    <div className="app-container">
-      <Sidebar />
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/admin" element={
-            <PrivateRoute><AdminPage /></PrivateRoute>
-          } />
-          <Route path="/dashboard" element={
-            <PrivateRoute><DashboardPage /></PrivateRoute>
-          } />
-          <Route path="/inspections" element={
-            <PrivateRoute><DashboardPage /></PrivateRoute>
-          } />
-          <Route path="/inspections/:id" element={
-            <PrivateRoute><InspectionDetailPage /></PrivateRoute>
-          } />
-          <Route path="/create-inspection" element={
-            <PrivateRoute><CreateInspectionPage /></PrivateRoute>
-          } />
-          <Route path="/defects" element={
-            <PrivateRoute><DefectsPage /></PrivateRoute>
-          } />
-        </Routes>
-      </main>
-    </div>
-  )
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/mission/:id"
+          element={
+            <ProtectedRoute>
+              <MissionPage />
+            </ProtectedRoute>
+          }
+        />
+        {/* Redirect old routes to dashboard */}
+        <Route path="/upload" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/reports" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/report/:id" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/admin" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
+  );
 }
 
-export default App
+export default App;

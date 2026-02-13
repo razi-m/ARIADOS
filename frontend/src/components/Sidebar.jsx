@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import Logo from './common/Logo'
 
 function Sidebar() {
     const { user, logout } = useAuth()
@@ -31,9 +32,8 @@ function Sidebar() {
 
     return (
         <aside className="sidebar">
-            <div className="sidebar-brand">
-                <DroneIcon />
-                <span>HackSav</span>
+            <div className="sidebar-brand flex items-center px-6 py-4">
+                <Logo className="h-10" textSize="text-2xl" />
             </div>
 
             <nav className="nav-menu">

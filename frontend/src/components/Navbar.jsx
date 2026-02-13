@@ -13,7 +13,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-brand">HackSav</div>
+      <div className="navbar-brand">ARIADOS</div>
       <div className="navbar-actions">
         <span style={{ color: 'var(--text-secondary)' }}>
           {user?.username || 'Admin'}
