@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     GEMINI_API_KEY: str
     JWT_SECRET: str
     ML_SERVICE_URL: str = "http://localhost:8001"
-    MODEL_PATH: str
+    MODEL_PATH: str = ""  # only used by the ML service, not the backend
     ADMIN_USERNAME: str = "admin"
     ADMIN_PASSWORD: str = ""
     ALLOWED_ORIGINS: str = "http://localhost:5173"
