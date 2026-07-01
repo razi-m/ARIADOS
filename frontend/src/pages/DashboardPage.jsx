@@ -646,7 +646,7 @@ const DashboardPage = memo(() => {
         {/* Logo Area */}
         <div className="h-20 flex items-center border-b border-gray-100 pl-6">
           <Link to="/">
-            <Logo className="h-12" />
+            <Logo className="h-10" variant="dark" />
           </Link>
         </div>
 

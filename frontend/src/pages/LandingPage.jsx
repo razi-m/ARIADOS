@@ -54,7 +54,7 @@ const LandingPage = memo(() => {
                 {/* Nav Bar */}
                 <nav className="absolute top-0 left-0 right-0 z-20 px-6 lg:px-12 py-5 flex items-center justify-between">
                     <Link to="/">
-                        <Logo className="h-[78px] text-white" textSize="text-[28px]" />
+                        <Logo className="h-12" variant="light" />
                     </Link>
                     <div className="hidden md:flex items-center gap-8 text-sm text-gray-300">
                         <a href="#how" className="hover:text-white transition">How It Works</a>

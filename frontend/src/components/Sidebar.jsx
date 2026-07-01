@@ -33,7 +33,7 @@ function Sidebar() {
     return (
         <aside className="sidebar">
             <div className="sidebar-brand flex items-center px-6 py-4">
-                <Logo className="h-10" textSize="text-2xl" />
+                <Logo className="h-10" variant="dark" />
             </div>
 
             <nav className="nav-menu">

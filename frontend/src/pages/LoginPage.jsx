@@ -50,7 +50,7 @@ const LoginPage = memo(() => {
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <Link to="/">
-            <Logo className="h-20 mb-6" />
+            <Logo className="h-16 mb-6" variant="light" />
           </Link>
           <p className="text-sm text-gray-400 mt-1">Authority Access Portal</p>
         </div>
