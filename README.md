@@ -62,7 +62,7 @@ ML Inference Service
 Defect Detection Results
         │
         ▼
-AI Report Generation (Gemini)
+AI Report Generation 
         │
         ▼
 Professional PDF Inspection Report
@@ -202,6 +202,9 @@ MIT
 
 ## Team
 
-**Mohammed Raziullah** — AI/ML & Full-Stack Development
-
+**Mohammed Raziullah** — AI/ML, System Architecture & Integration
+**Tabrez Khan** — Frontend Development
+**Mohammed Zaid Hussain** — Backend Development
+**Mirza Zabiullah Baig** — AI/ML 
+**Mohammed Abdul Haseeb** — AI/ML 
 HackSavvy 2026
