@@ -29,7 +29,7 @@ async def lifespan(app: FastAPI):
             if not admin:
                 admin_user = User()
                 admin_user.username = admin_username
-                admin_user.hashed_password = get_password_hash(admin_password)
+                admin_user.hashed_password = get_password_hash(admin_password[:72])
                 admin_user.role = "admin"
                 db.add(admin_user)
                 db.commit()
